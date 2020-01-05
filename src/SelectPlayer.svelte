@@ -38,6 +38,11 @@
       on:click={selectPlayer}>
         {action} all
     </button>
+
+    <button
+      on:click={selectPlayer}>
+        {action} bank
+    </button>
 </section>
 
 <style>
