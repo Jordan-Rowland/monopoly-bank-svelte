@@ -108,7 +108,7 @@
 
 <section>
   <h2>{name}</h2>
-  <h5>${money}</h5>
+  <h4>${money}</h4>
   <button
     on:click={() => selectPlayerPayPrompt = true}>
     Pay Player
