@@ -3,13 +3,14 @@
   const dispatch = createEventDispatcher();
 
   export let players;
+  export let action;
+
   let player;
   let amount;
 
   function selectPlayer(event) {
     let innerText = event.target.innerText;
     player = innerText.split(" ")[1];
-    console.log(player);
     dispatch('transaction', {player: player, amount: amount});
   }
 
@@ -30,9 +31,13 @@
   {#each players as player}
     <button
       on:click={selectPlayer}>
-        Pay {player.name}
+        {action} {player.name}
     </button>
   {/each}
+    <button
+      on:click={selectPlayer}>
+        {action} all
+    </button>
 </section>
 
 <style>

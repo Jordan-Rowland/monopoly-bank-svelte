@@ -7,7 +7,8 @@
 
   export let name;
   export let money;
-  let selectPlayerPrompt = false;
+  let selectPlayerPayPrompt = false;
+  let selectPlayerCollectPrompt = false;
 
   const players = $playerStore;
   let classes = "";
@@ -17,24 +18,70 @@
   );
 
   function pay(event) {
-    console.log(event)
-    if (event.detail.amount) {
-      playerStore.payPlayer(
-        name,
-        event.detail.player,
-        event.detail.amount,
+    const payer = name;
+    const payee = event.detail.player;
+    const amount = event.detail.amount;
+    if (amount) {
+      if (payee === 'all') {
+        for (const player of otherPlayers) {
+          playerStore.payPlayer(
+            payer,
+            player.name,
+            amount,
+          );
+        }
+      } else {
+        playerStore.payPlayer(
+          payer,
+          payee,
+          amount,
       );
-      selectPlayerPrompt = false;
+     }
+      selectPlayerPayPrompt = false;
+    }
+  }
+
+  function collect(event) {
+    const payee = name;
+    const payer = event.detail.player;
+    const amount = event.detail.amount;
+    if (amount) {
+      if (payer === 'all') {
+        for (const player of otherPlayers) {
+          playerStore.payPlayer(
+            player.name,
+            payee,
+            amount,
+          );
+        }
+      } else {
+        playerStore.payPlayer(
+          payer,
+          payee,
+          amount,
+      );
+     }
+      selectPlayerCollectPrompt = false;
     }
   }
 
 </script>
 
-{#if selectPlayerPrompt}
+{#if selectPlayerPayPrompt}
   <SelectPlayer
     players={otherPlayers}
+    action="Pay"
     on:transaction={pay}
-    on:close-modal={() => selectPlayerPrompt = false}
+    on:close-modal={() => selectPlayerPayPrompt = false}
+  />
+{/if}
+
+{#if selectPlayerCollectPrompt}
+  <SelectPlayer
+    players={otherPlayers}
+    action="Collect"
+    on:transaction={collect}
+    on:close-modal={() => selectPlayerCollectPrompt = false}
   />
 {/if}
 
@@ -42,9 +89,15 @@
   <h2>{name}</h2>
   <h5>${money}</h5>
   <button
-    on:click={() => selectPlayerPrompt = true}>
+    on:click={() => selectPlayerPayPrompt = true}>
     Pay Player
   </button>
+
+  <button
+    on:click={() => selectPlayerCollectPrompt = true}>
+    Collect Money
+  </button>
+
 </section>
 
 <style>
