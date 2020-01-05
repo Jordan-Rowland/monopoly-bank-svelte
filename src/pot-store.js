@@ -7,16 +7,19 @@ const pot = writable(150);
 
 const potStore = {
   subscribe: pot.subscribe,
-  collectPot: player => {
+
+  collectPot: () => {
     pot.update(
       item => 0
     );
   },
+
   payPot: amount => {
     pot.update(
       item => item += amount
     );
   },
+
 };
 
 

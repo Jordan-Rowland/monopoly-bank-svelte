@@ -8,11 +8,12 @@
 
   export let name;
   export let money;
+  const players = $playerStore;
+
   let selectPlayerPayPrompt = false;
   let selectPlayerCollectPrompt = false;
-
-  const players = $playerStore;
   let classes = "";
+  let potAmount;
 
   const otherPlayers = players.filter(
     player => player.name !== name
@@ -73,14 +74,16 @@
     selectPlayerCollectPrompt = false;
   }
 
-  function payPot(amount) {
-    money -= 150;
-    potStore.payPot(150);
+  function payPot() {
+    console.log(potAmount);
+    money -= potAmount;
+    potStore.payPot(potAmount);
+    potAmount = null;
   }
 
   function collectPot() {
     money += $potStore;
-    potStore.collectPot(name);
+    potStore.collectPot();
   }
 
 </script>
@@ -116,6 +119,7 @@
     Collect Money
   </button>
 
+  <input type="number" bind:value={potAmount}>
   <button
     on:click={payPot}>
     Pay pot
