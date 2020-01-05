@@ -16,11 +16,26 @@
     player => player.name !== name
   );
 
+  function pay(event) {
+    console.log(event)
+    if (event.detail.amount) {
+      playerStore.payPlayer(
+        name,
+        event.detail.player,
+        event.detail.amount,
+      );
+      selectPlayerPrompt = false;
+    }
+  }
 
 </script>
 
 {#if selectPlayerPrompt}
-  <SelectPlayer players={otherPlayers} />
+  <SelectPlayer
+    players={otherPlayers}
+    on:transaction={pay}
+    on:close-modal={() => selectPlayerPrompt = false}
+  />
 {/if}
 
 <section>
@@ -28,7 +43,7 @@
   <h5>${money}</h5>
   <button
     on:click={() => selectPlayerPrompt = true}>
-    Pay Player(s)
+    Pay Player
   </button>
 </section>
 
@@ -37,8 +52,9 @@
 section {
   border-radius: 4px;
   border: 1px solid black;
-  margin: 1rem;
+  margin: 1rem auto;
   padding: 1rem;
+  width: 65%;
 }
 
 .selected-to-pay {
