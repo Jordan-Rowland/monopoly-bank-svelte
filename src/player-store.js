@@ -1,26 +1,23 @@
 import { writable } from 'svelte/store';
 
+
 const players = writable([
   {
     name: "Michael",
     money: 2000,
-    transaction: null,
   },
   {
     name: "Jan",
     money: 1500,
-    transaction: null,
   },
   {
     name: "Dwight",
     money: 1000,
-    transaction: null,
   },
   {
     name: "Oscar",
     money: 500,
-    transaction: null,
-  }
+  },
 ]);
 
 
