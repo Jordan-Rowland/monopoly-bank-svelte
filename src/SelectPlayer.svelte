@@ -11,6 +11,7 @@
   function selectPlayer(event) {
     let innerText = event.target.innerText;
     player = innerText.split(" ")[1];
+    console.log(innerText.split(" "));
     dispatch('transaction', {player: player, amount: amount});
   }
 
@@ -37,6 +38,11 @@
     <button
       on:click={selectPlayer}>
         {action} all
+    </button>
+
+    <button
+      on:click={selectPlayer}>
+        {action} bank
     </button>
 </section>
 

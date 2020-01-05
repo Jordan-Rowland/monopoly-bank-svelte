@@ -3,6 +3,7 @@
   const dispatch = createEventDispatcher();
   import SelectPlayer from "./SelectPlayer.svelte";
   import playerStore from "./player-store.js";
+  import potStore from "./pot-store.js";
 
 
   export let name;
@@ -21,48 +22,65 @@
     const payer = name;
     const payee = event.detail.player;
     const amount = event.detail.amount;
-    if (amount) {
-      if (payee === 'all') {
-        for (const player of otherPlayers) {
-          playerStore.payPlayer(
-            payer,
-            player.name,
-            amount,
-          );
-        }
-      } else {
+    if (!amount) {
+      console.log("No amount");
+    }
+    // Move this logic to store
+    if (money < amount) {
+      console.log("Not enough money");
+      return false;
+    }
+    if (payee === 'all') {
+      for (const player of otherPlayers) {
         playerStore.payPlayer(
           payer,
-          payee,
+          player.name,
           amount,
+        );
+      }
+    } else {
+      playerStore.payPlayer(
+        payer,
+        payee,
+        amount,
       );
      }
-      selectPlayerPayPrompt = false;
-    }
+    selectPlayerPayPrompt = false;
   }
 
   function collect(event) {
-    const payee = name;
     const payer = event.detail.player;
+    const payee = name;
     const amount = event.detail.amount;
-    if (amount) {
-      if (payer === 'all') {
-        for (const player of otherPlayers) {
-          playerStore.payPlayer(
-            player.name,
-            payee,
-            amount,
-          );
-        }
-      } else {
+    if (!amount) {
+      console.log("No amount");
+    }
+    if (payer === 'all') {
+      for (const player of otherPlayers) {
         playerStore.payPlayer(
-          payer,
+          player.name,
           payee,
           amount,
-      );
-     }
-      selectPlayerCollectPrompt = false;
-    }
+        );
+      }
+    } else {
+      playerStore.payPlayer(
+        payer,
+        payee,
+        amount,
+    );
+   }
+    selectPlayerCollectPrompt = false;
+  }
+
+  function payPot(amount) {
+    money -= 150;
+    potStore.payPot(150);
+  }
+
+  function collectPot() {
+    money += $potStore;
+    potStore.collectPot(name);
   }
 
 </script>
@@ -98,15 +116,33 @@
     Collect Money
   </button>
 
+  <button
+    on:click={payPot}>
+    Pay pot
+  </button>
+
+  <button
+    on:click={collectPot}>
+    Collect pot(${$potStore})
+  </button>
+
 </section>
 
 <style>
 
+:root {
+  --main-bg-color: hsl(210, 100%, 95%);
+  --main-border-color: hsl(210, 100%, 80%);
+  --main-text-color: hsl(210, 100%, 25%);
+}
+
 section {
+  background-color: var(--main-bg-color);
+  border: 1.7px solid var(--main-border-color);
+  color: var(--main-text-color);
   border-radius: 4px;
-  border: 1px solid black;
-  margin: 1rem auto;
-  padding: 1rem;
+  margin: .3rem auto;
+  padding: .25rem;
   width: 65%;
 }
 
