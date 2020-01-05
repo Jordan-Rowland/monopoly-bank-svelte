@@ -4,46 +4,38 @@
 
   export let players;
   let player;
+  let amount;
 
   function selectPlayer(event) {
-    player = event.target.innerText;
-    // dispatch("select-player", player);
+    let innerText = event.target.innerText;
+    player = innerText.split(" ")[1];
+    console.log(player);
+    dispatch('transaction', {player: player, amount: amount});
   }
 
-  function pay() {
-    dispatch('transaction', player);
+  function closeModal() {
+    dispatch("close-modal");
   }
 
 </script>
 
-<div id="black-drop"></div>
+<div id="black-drop" on:click={closeModal}></div>
 <section>
   <label>
-    Amount
-    <input type="number">
+    <input
+      type="number"
+      bind:value={amount}
+      placeholder="Amount to pay">
   </label>
-  <button
-    on:click={pay}>
-      Transaction
-  </button>
   {#each players as player}
     <button
       on:click={selectPlayer}>
-        {player.name}
+        Pay {player.name}
     </button>
   {/each}
 </section>
 
 <style>
-
-section {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  width: 5rem;
-  left: 45%;
-  top: 35%;
-}
 
 #black-drop {
   position: absolute;
@@ -52,6 +44,19 @@ section {
   left: 0;
   width: 100vw;
   height: 100vh;
+}
+
+input {
+  width: 15rem;
+}
+
+section {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 15rem;
+  left: 45%;
+  top: 35%;
 }
 
 </style>
