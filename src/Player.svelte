@@ -75,17 +75,18 @@
   }
 
   function payPot() {
-    // Need to access store for accurate player money
+    playerStore.pay(name, potAmount);
     console.log(`Paid ${potAmount} to community pot`);
     money -= potAmount;
     potStore.payPot(potAmount);
+
     potAmount = null;
   }
 
   function collectPot() {
-    // Need to access store for accurate player money
-    money += $potStore;
+    playerStore.collect(name, $potStore);
     console.log(`Collected ${$potStore} from community pot`);
+    money += $potStore;
     potStore.collectPot();
   }
 
