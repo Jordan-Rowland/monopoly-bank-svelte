@@ -5,17 +5,29 @@
 
 </script>
 
-{#each $playerStore as player}
-	<Player
-		name={player.name}
-		money={player.money}
-	/>
-{/each}
+<main>
+  <section>
+    {#each $playerStore as player}
+    	<Player
+    		name={player.name}
+    		money={player.money}
+    	/>
+    {/each}
+  </section>
+</main>
 
 <style>
 
-button {
-	width: 200px;
+main {
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: space-between;
+}
+
+section {
+  display: flex;
+  height: 45rem;
 }
 
 </style>

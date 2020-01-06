@@ -75,14 +75,17 @@
   }
 
   function payPot() {
-    console.log(potAmount);
+    // Need to access store for accurate player money
+    console.log(`Paid ${potAmount} to community pot`);
     money -= potAmount;
     potStore.payPot(potAmount);
     potAmount = null;
   }
 
   function collectPot() {
+    // Need to access store for accurate player money
     money += $potStore;
+    console.log(`Collected ${$potStore} from community pot`);
     potStore.collectPot();
   }
 
@@ -107,29 +110,36 @@
 {/if}
 
 <section>
-  <h2>{name}</h2>
-  <h5>${money}</h5>
-  <button
-    on:click={() => selectPlayerPayPrompt = true}>
-    Pay Player
-  </button>
+  <div>
+    <h2>{name}</h2>
+    <h4>${money}</h4>
+  </div>
 
-  <button
-    on:click={() => selectPlayerCollectPrompt = true}>
-    Collect Money
-  </button>
-
-  <input type="number" bind:value={potAmount}>
-  <button
-    on:click={payPot}>
-    Pay pot
-  </button>
-
-  <button
-    on:click={collectPot}>
-    Collect pot(${$potStore})
-  </button>
-
+  <div>
+    <button
+      on:click={() => selectPlayerPayPrompt = true}>
+      Pay Player
+    </button>
+  </div>
+  <div>
+    <button
+      on:click={() => selectPlayerCollectPrompt = true}>
+      Collect Money
+    </button>
+  </div>
+  <div>
+    <input type="number" bind:value={potAmount}>
+    <button
+      on:click={payPot}>
+      Pay pot
+    </button>
+  </div>
+  <div>
+    <button
+      on:click={collectPot}>
+      Collect pot(${$potStore})
+    </button>
+  </div>
 </section>
 
 <style>
@@ -141,20 +151,26 @@
 }
 
 section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: stretch;
   background-color: var(--main-bg-color);
   border: 1.7px solid var(--main-border-color);
   color: var(--main-text-color);
   border-radius: 4px;
-  margin: .3rem auto;
-  padding: .25rem;
-  width: 65%;
+  margin: 1.2rem;
+  padding: .25rem 3rem;
+  width: 45%;
+  height: 66%;
 }
 
-.selected-to-pay {
-  border: 1.5px solid green;
+button {
+  width: 100%;
 }
 
-.selected-to-collect {
-  border: 1.5px solid red;
+input {
+  width: 100%;
 }
+
 </style>
