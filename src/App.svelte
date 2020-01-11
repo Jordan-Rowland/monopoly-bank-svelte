@@ -1,14 +1,15 @@
 <script>
-	import Player from "./Player.svelte";
-	import playerStore from "./player-store.js";
+import Player from "./Player.svelte";
+import playerStore from "./player-store.js";
 
 
 </script>
 
 <main>
   <section>
-    {#each $playerStore as player}
+    {#each $playerStore as player (player.id)}
     	<Player
+        id={player.id}
     		name={player.name}
     		money={player.money}
     	/>
@@ -18,16 +19,28 @@
 
 <style>
 
+@media (max-width: 640px) {
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  main {
+    margin-top: 50px
+  }
+}
+
 main {
-  margin: auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: space-between;
+  /*margin: auto;*/
+  /*display: flex;*/
+  margin-top: 50px
 }
 
 section {
   display: flex;
   height: 45rem;
 }
+
 
 </style>
