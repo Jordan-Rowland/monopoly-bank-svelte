@@ -65,19 +65,23 @@ function closeModal() {
 }
 
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-input {
-  width: 15rem;
+  /*position: absolute;*/
+  /*position: relative;*/
+  /*display: flex;*/
+  /*justify-content: center;*/
+  /*align-items: center;*/
 }
 
 section {
   position: absolute;
+  top: 25%;
+  left: 43%;
   display: flex;
   flex-direction: column;
+  width: 15rem;
+}
+
+input {
   width: 15rem;
 }
 
@@ -85,20 +89,15 @@ section {
   display: none;
 }
 
+
 @media (max-width: 640px) {
-  /*.container {
+  .container {
     display: flex;
     justify-content: center;
-  }*/
+  }
 
   #black-drop {
     display: none;
-    /*position: sticky;*/
-    /*background-color: hsla(0, 0%, 0%, .4);*/
-    /*top: 0;*/
-    /*left: 0;*/
-    /*width: 0vw;*/
-    /*height: 0vh;*/
   }
 
   .cancel-button {
@@ -106,19 +105,18 @@ section {
   }
 
   section {
-    position: sticky;
+    top: 0;
+    left: 0;
+    position: relative;
     flex-direction: column;
     width: 15rem;
-    left: 45%;
-    top: 35%;
   }
 
 }
 
 
-
-  main {
-    margin-top: 50px;
-  }
+main {
+  margin-top: 50px;
+}
 
 </style>

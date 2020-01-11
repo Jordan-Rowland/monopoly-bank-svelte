@@ -25,6 +25,7 @@ function pay(event) {
   const amount = event.detail.amount;
   if (!amount) {
     console.log("No amount");
+    return false;
   }
   // Move this logic to store
   if (money < amount) {
@@ -55,6 +56,7 @@ function collect(event) {
   const amount = event.detail.amount;
   if (!amount) {
     console.log("No amount");
+    return false
   }
   if (payer === 'all') {
     for (const player of otherPlayers) {
@@ -93,21 +95,25 @@ function collectPot() {
 </script>
 
 {#if selectPlayerPayPrompt}
-  <SelectPlayer
-    players={otherPlayers}
-    action="Pay"
-    on:transaction={pay}
-    on:close-modal={() => selectPlayerPayPrompt = false}
-  />
+  <div class="select-player">
+    <SelectPlayer
+      players={otherPlayers}
+      action="Pay"
+      on:transaction={pay}
+      on:close-modal={() => selectPlayerPayPrompt = false}
+    />
+  </div>
 {/if}
 
 {#if selectPlayerCollectPrompt}
-  <SelectPlayer
-    players={otherPlayers}
-    action="Collect"
-    on:transaction={collect}
-    on:close-modal={() => selectPlayerCollectPrompt = false}
-  />
+  <div class="select-player">
+    <SelectPlayer
+      players={otherPlayers}
+      action="Collect"
+      on:transaction={collect}
+      on:close-modal={() => selectPlayerCollectPrompt = false}
+    />
+  </div>
 {/if}
 
 <section id="p{id}">
@@ -170,6 +176,13 @@ section {
   padding: .25rem 3rem;
   width: 45%;
   height: 66%;
+}
+
+.select-player {
+  /*position: absolute;*/
+  /*display: flex;*/
+  /*justify-content: center;*/
+  /*align-items: center;*/
 }
 
 #p1 {
