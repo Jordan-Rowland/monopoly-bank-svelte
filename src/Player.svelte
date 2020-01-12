@@ -218,4 +218,10 @@ input {
   border-color: hsla(0, 0%, 0%, 0.4);
 }
 
+@media (max-width: 640px) {
+  section {
+    width: 70%;
+  }
+}
+
 </style>

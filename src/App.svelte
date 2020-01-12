@@ -5,8 +5,8 @@ import MoveHistory from "./MoveHistory.svelte";
 
 
 import playerStore from "./player-store.js";
-let viewHistory = true;
-let moveHistory = ["Jim paid Dwight $400"];
+let viewHistory = false;
+let moveHistory = [];
 let lastMove = "Make a move!";
 
 function receiveMessage(event) {
@@ -52,15 +52,13 @@ function receiveMessage(event) {
     align-items: center;
   }
 
-  main {
-    margin-top: 50px
-  }
+  /*main {
+    margin-top: 0px
+  }*/
 }
 
 main {
-  /*margin: auto;*/
-  /*display: flex;*/
-  margin-top: 50px
+  margin-top: 70px
 }
 
 section {
