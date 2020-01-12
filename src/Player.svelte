@@ -13,7 +13,7 @@ const players = $playerStore;
 let selectPlayerPayPrompt = false;
 let selectPlayerCollectPrompt = false;
 let classes = "";
-let potAmount;
+// let potAmount;
 
 const otherPlayers = players.filter(
   player => player.name !== name
@@ -78,13 +78,15 @@ function collect(event) {
   dispatch("send-message", `${name} collected $${amount} from ${payer}`);
 }
 
-function payPot() {
+function payPot(event) {
+  const potAmount = event.detail.amount;
   playerStore.pay(name, potAmount);
   console.log(`${name} paid ${potAmount} to community pot`);
   money -= potAmount;
   potStore.payPot(potAmount);
   dispatch("send-message", `${name} put $${potAmount} into the Community Pot`);
-  potAmount = null;
+  selectPlayerPayPrompt = false;
+  // potAmount = null;
 }
 
 function collectPot() {
@@ -93,16 +95,56 @@ function collectPot() {
   dispatch("send-message", `${name} collected $${$potStore} from the Community Pot`);
   money += $potStore;
   potStore.collectPot();
+  selectPlayerCollectPrompt = false;
 }
 
 </script>
 
+<section id="p{id}">
+  <div class="headers">
+    <div>
+      <h2>{name}</h2>
+      <h4>${money}</h4>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <div>
+      <button
+        on:click={() => selectPlayerPayPrompt = true}>
+        Pay Player
+      </button>
+    </div>
+    <div>
+      <button
+        on:click={() => selectPlayerCollectPrompt = true}>
+        Collect Money
+      </button>
+    </div>
+  </div>
+<!--   <div>
+    <input type="number" bind:value={potAmount}>
+    <button
+      on:click={payPot}>
+      Pay pot
+    </button>
+  </div> -->
+<!--   <div>
+    <button
+      on:click={collectPot}>
+      Collect pot(${$potStore})
+    </button>
+  </div> -->
+</section>
+
+<!-- Dynamic component here ?? -->
 {#if selectPlayerPayPrompt}
   <div class="select-player">
     <SelectPlayer
       players={otherPlayers}
       action="Pay"
       on:transaction={pay}
+      on:transaction-pot={payPot}
       on:close-modal={() => selectPlayerPayPrompt = false}
     />
   </div>
@@ -114,43 +156,11 @@ function collectPot() {
       players={otherPlayers}
       action="Collect"
       on:transaction={collect}
+      on:transaction-pot={collectPot}
       on:close-modal={() => selectPlayerCollectPrompt = false}
     />
   </div>
 {/if}
-
-<section id="p{id}">
-  <div>
-    <h2>{name}</h2>
-    <h4>${money}</h4>
-  </div>
-
-  <div>
-    <button
-      on:click={() => selectPlayerPayPrompt = true}>
-      Pay Player
-    </button>
-  </div>
-  <div>
-    <button
-      on:click={() => selectPlayerCollectPrompt = true}>
-      Collect Money
-    </button>
-  </div>
-  <div>
-    <input type="number" bind:value={potAmount}>
-    <button
-      on:click={payPot}>
-      Pay pot
-    </button>
-  </div>
-  <div>
-    <button
-      on:click={collectPot}>
-      Collect pot(${$potStore})
-    </button>
-  </div>
-</section>
 
 <style>
 
@@ -172,13 +182,12 @@ function collectPot() {
 section {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   align-items: stretch;
   border-radius: 4px;
   margin: 1.2rem;
   padding: .25rem 3rem;
   width: 45%;
-  height: 66%;
+  height: 35%;
 }
 
 #p1 {
@@ -212,6 +221,10 @@ button {
   border-color: hsla(0, 0%, 0%, 0.4);
 }
 
+.buttons {
+  margin-top: 0.5rem;
+}
+
 input {
   width: 100%;
   border-radius: 3px;
@@ -220,7 +233,34 @@ input {
 
 @media (max-width: 640px) {
   section {
+    flex-direction: row;
+    justify-content: space-between;
     width: 70%;
+    margin: 0.3rem;
+    padding: 0 1.5rem;
+    height: 15%;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin: 1rem 0 1rem 2rem;
+    /*margin-left: 2rem;*/
+  }
+
+  button {
+    width: 4.5rem;
+    height: 4.5rem;
+    margin: 0 0.2rem;
+  }
+
+
+}
+
+@media (min-width: 640px) {
+  button {
+    height: 3rem;
   }
 }
 

@@ -52,9 +52,6 @@ function receiveMessage(event) {
     align-items: center;
   }
 
-  /*main {
-    margin-top: 0px
-  }*/
 }
 
 main {
@@ -63,7 +60,6 @@ main {
 
 section {
   display: flex;
-  height: 45rem;
 }
 
 

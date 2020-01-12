@@ -2,16 +2,23 @@
 import { createEventDispatcher } from "svelte";
 const dispatch = createEventDispatcher();
 
+import potStore from "./pot-store.js";
+
 export let players;
 export let action;
 
 let player;
 let amount;
+let placeholder = `Amount to ${action}`;
 
 function selectPlayer(event) {
   let innerText = event.target.innerText;
   player = innerText.split(" ")[1];
   dispatch('transaction', {player: player, amount: amount});
+}
+
+function selectPot(event) {
+  dispatch('transaction-pot', {amount: amount});
 }
 
 function closeModal() {
@@ -27,24 +34,28 @@ function closeModal() {
       <input
         type="number"
         bind:value={amount}
-        placeholder="Amount to pay">
+        {placeholder}>
     </label>
-    {#each players as player (player.name)}
-      <button
-        on:click={selectPlayer}>
-          {action} {player.name}
-      </button>
-    {/each}
-      <button
-        on:click={selectPlayer}>
-          {action} all
-      </button>
-
-      <button
-        on:click={selectPlayer}>
-          {action} bank
-      </button>
-
+    {#if action === "Pay"}
+      {#each players as player (player.name)}
+        <button
+          on:click={selectPlayer}>
+            {action} {player.name}
+        </button>
+      {/each}
+    {/if}
+        <button
+          on:click={selectPlayer}>
+            {action} all
+        </button>
+        <button
+          on:click={selectPlayer}>
+            {action} bank
+        </button>
+        <button
+          on:click={selectPot}>
+            {action} Community Pot(${$potStore})
+        </button>
       <button
         class="cancel-button"
         on:click={closeModal}>
@@ -62,14 +73,6 @@ function closeModal() {
   left: 0;
   width: 100vw;
   height: 100vh;
-}
-
-.container {
-  /*position: absolute;*/
-  /*position: relative;*/
-  /*display: flex;*/
-  /*justify-content: center;*/
-  /*align-items: center;*/
 }
 
 section {

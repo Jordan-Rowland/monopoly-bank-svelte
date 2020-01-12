@@ -50,6 +50,7 @@ $: console.log(moveHistory);
   .moves {
     /*font-size: 0.9rem;*/
     background-color: hsla(215, 100%, 50%, 0.85);
+    color: hsl(215, 70%, 90%);
     width: 80%;
   }
 }
