@@ -1,9 +1,34 @@
 <script>
 import Player from "./Player.svelte";
-import playerStore from "./player-store.js";
+import LastMove from "./LastMove.svelte";
+import MoveHistory from "./MoveHistory.svelte";
 
+
+import playerStore from "./player-store.js";
+let viewHistory = true;
+let moveHistory = ["Jim paid Dwight $400"];
+let lastMove = "Make a move!";
+
+function receiveMessage(event) {
+  lastMove = event.detail;
+  console.log(lastMove);
+  moveHistory = [lastMove ,...moveHistory];
+}
 
 </script>
+
+<header>
+  <LastMove
+    message={lastMove}
+    on:click={() => viewHistory = true}
+  />
+  {#if viewHistory}
+    <MoveHistory
+      moveHistory={moveHistory}
+      on:click={() => viewHistory = false}
+    />
+  {/if}
+</header>
 
 <main>
   <section>
@@ -12,6 +37,7 @@ import playerStore from "./player-store.js";
         id={player.id}
     		name={player.name}
     		money={player.money}
+        on:send-message={receiveMessage}
     	/>
     {/each}
   </section>

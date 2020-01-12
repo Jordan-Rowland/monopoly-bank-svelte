@@ -48,6 +48,7 @@ function pay(event) {
     );
    }
   selectPlayerPayPrompt = false;
+  dispatch("send-message", `${name} paid ${payee} $${amount}`);
 }
 
 function collect(event) {
@@ -56,7 +57,7 @@ function collect(event) {
   const amount = event.detail.amount;
   if (!amount) {
     console.log("No amount");
-    return false
+    return false;
   }
   if (payer === 'all') {
     for (const player of otherPlayers) {
@@ -74,6 +75,7 @@ function collect(event) {
   );
  }
   selectPlayerCollectPrompt = false;
+  dispatch("send-message", `${name} collected $${amount} from ${payer}`);
 }
 
 function payPot() {
@@ -81,13 +83,14 @@ function payPot() {
   console.log(`${name} paid ${potAmount} to community pot`);
   money -= potAmount;
   potStore.payPot(potAmount);
-
+  dispatch("send-message", `${name} put $${potAmount} into the Community Pot`);
   potAmount = null;
 }
 
 function collectPot() {
   playerStore.collect(name, $potStore);
   console.log(`${name} collected ${$potStore} from community pot`);
+  dispatch("send-message", `${name} collected $${$potStore} from the Community Pot`);
   money += $potStore;
   potStore.collectPot();
 }
@@ -176,13 +179,6 @@ section {
   padding: .25rem 3rem;
   width: 45%;
   height: 66%;
-}
-
-.select-player {
-  /*position: absolute;*/
-  /*display: flex;*/
-  /*justify-content: center;*/
-  /*align-items: center;*/
 }
 
 #p1 {
