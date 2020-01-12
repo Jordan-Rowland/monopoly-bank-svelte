@@ -34,17 +34,24 @@ $: console.log(moveHistory);
 
 .moves {
   position: fixed;
-  /*position: absolute;*/
   width: 60%;
   top: 60px;
-  background-color: hsla(80, 100%, 50%, 0.7);
-  color: hsl(80, 70%, 30%);
+  background-color: hsla(215, 100%, 50%, 0.7);
+  color: hsl(215, 70%, 50%);
   font-weight: 800;
   padding: 0.5rem;
 }
 
 .move {
   padding: 0.2rem 0;
+}
+
+@media (max-width: 640px) {
+  .moves {
+    /*font-size: 0.9rem;*/
+    background-color: hsla(215, 100%, 50%, 0.85);
+    width: 80%;
+  }
 }
 
 </style>

@@ -52,15 +52,13 @@ function receiveMessage(event) {
     align-items: center;
   }
 
-  main {
-    margin-top: 50px
-  }
+  /*main {
+    margin-top: 0px
+  }*/
 }
 
 main {
-  /*margin: auto;*/
-  /*display: flex;*/
-  margin-top: 50px
+  margin-top: 70px
 }
 
 section {
