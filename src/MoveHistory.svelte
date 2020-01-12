@@ -9,13 +9,17 @@ $: console.log(moveHistory);
 
 <div class="container">
   <div class="moves" on:click>
-    {#if moveHistory}
-      {#each moveHistory as move}
-        <div class="move">
-          {move}
-        </div>
-      {/each}
-    {/if}
+    <ul>
+      {#if moveHistory}
+        {#each moveHistory as move}
+          <div class="move">
+            <li>
+              {move}
+            </li>
+          </div>
+        {/each}
+      {/if}
+    </ul>
   </div>
 </div>
 
@@ -33,8 +37,8 @@ $: console.log(moveHistory);
   /*position: absolute;*/
   width: 60%;
   top: 60px;
-  background-color: hsla(280, 100%, 50%, 0.7);
-  color: hsl(280, 70%, 30%);
+  background-color: hsla(80, 100%, 50%, 0.7);
+  color: hsl(80, 70%, 30%);
   font-weight: 800;
   padding: 0.5rem;
 }

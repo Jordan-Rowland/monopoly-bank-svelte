@@ -21,7 +21,7 @@ div {
   width: 100%;
   top: 0;
   left: 0;
-  padding: 15px;
+  padding: 15px 0;
   background-color: hsl(10, 50%, 70%);
   color: hsl(0, 0%, 99%);
   font-weight: 800;
