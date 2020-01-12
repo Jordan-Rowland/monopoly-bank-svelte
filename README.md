@@ -6,4 +6,3 @@ WIP banking system for the board game Monopoly.
 
 TODO: 
 * Start custom game feature(for reviving a previous game)
-* Pop-up display of last move played / previous actions taken
