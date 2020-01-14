@@ -26,13 +26,14 @@ function showError(event) {
 
 function clearErrors() {
   showErrorMessage = false;
+  errorMessages = [];
 }
 
 </script>
 
 {#if showErrorMessage}
   <Error messages={errorMessages}
-    on:click={clearErrors}/>
+    on:click={clearErrors} />
 {/if}
 
 

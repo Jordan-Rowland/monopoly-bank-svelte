@@ -43,6 +43,7 @@ $: console.log(moveHistory);
 }
 
 .move {
+  color: hsl(215, 70%, 90%);
   padding: 0.2rem 0;
 }
 

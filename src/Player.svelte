@@ -8,13 +8,15 @@ import potStore from "./pot-store.js";
 export let id;
 export let name;
 export let money;
-const players = $playerStore;
+$: players = $playerStore;
+
+$: console.log(players);
 
 let selectPlayerPayPrompt = false;
 let selectPlayerCollectPrompt = false;
 let classes = "";
 
-const otherPlayers = players.filter(
+$: otherPlayers = players.filter(
   player => player.name !== name
 );
 
@@ -62,6 +64,7 @@ function collectFrom(event) {
     dispatch("error", "Please enter an amount");
     return false;
   }
+  dispatch("send-message", `${name} is collecting from all`);
   for (const player of otherPlayers) {
     if (player.money < amount) {
       dispatch("error", `${player.name} does not have enough money for this transaction`);
@@ -71,10 +74,10 @@ function collectFrom(event) {
         payee,
         amount,
       );
+      dispatch("send-message", `${name} collected $${amount} from ${player.name}`);
     }
   }
   selectPlayerCollectPrompt = false;
-  dispatch("send-message", `${name} collected $${amount} from ${payer}`);
 }
 
 function payPot(event) {
