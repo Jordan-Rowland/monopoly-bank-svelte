@@ -28,7 +28,7 @@ const players = writable([
 const playerStore = {
   subscribe: players.subscribe,
 
-  pay: (name, amount) => {
+  payPot: (name, amount) => {
     players.update(items => {
       const payerIndex = items.findIndex(player => player.name === name);
       const updatedPlayers = [...items];
@@ -41,7 +41,7 @@ const playerStore = {
     });
   },
 
-  collect: (selectedPlayer, amount) => {
+  collectPot: (selectedPlayer, amount) => {
     players.update(items => {
       const payeeIndex = items.findIndex(player => player.name === selectedPlayer);
       const updatedPlayers = [...items];

@@ -2,12 +2,16 @@
 import Player from "./Player.svelte";
 import LastMove from "./LastMove.svelte";
 import MoveHistory from "./MoveHistory.svelte";
-
+import Error from "./Error.svelte";
 
 import playerStore from "./player-store.js";
+
+
 let viewHistory = false;
 let moveHistory = [];
 let lastMove = "Make a move!";
+let errorMessages = [];
+let showErrorMessage = false;
 
 function receiveMessage(event) {
   lastMove = event.detail;
@@ -15,7 +19,23 @@ function receiveMessage(event) {
   moveHistory = [lastMove ,...moveHistory];
 }
 
+function showError(event) {
+  errorMessages = [...errorMessages, event.detail];
+  showErrorMessage = true;
+}
+
+function clearErrors() {
+  showErrorMessage = false;
+  errorMessages = [];
+}
+
 </script>
+
+{#if showErrorMessage}
+  <Error messages={errorMessages}
+    on:click={clearErrors} />
+{/if}
+
 
 <header>
   <LastMove
@@ -30,6 +50,7 @@ function receiveMessage(event) {
   {/if}
 </header>
 
+
 <main>
   <section>
     {#each $playerStore as player (player.id)}
@@ -38,11 +59,13 @@ function receiveMessage(event) {
     		name={player.name}
     		money={player.money}
         on:send-message={receiveMessage}
+        on:error={showError}
     	/>
     {/each}
   </section>
 </main>
 
+<!-- <button on:click={() => showErrorMessage = !showErrorMessage}>Show Error</button> -->
 <style>
 
 @media (max-width: 640px) {
