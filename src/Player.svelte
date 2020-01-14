@@ -8,15 +8,18 @@ import potStore from "./pot-store.js";
 export let id;
 export let name;
 export let money;
-$: players = $playerStore;
-
-$: console.log(players);
 
 let selectPlayerPayPrompt = false;
 let selectPlayerCollectPrompt = false;
 let classes = "";
 
-$: otherPlayers = players.filter(
+// refactor this, no need for players variable
+// $: players = $playerStore;
+// $: otherPlayers = players.filter(
+//   player => player.name !== name
+// );
+
+$: otherPlayers = $playerStore.filter(
   player => player.name !== name
 );
 

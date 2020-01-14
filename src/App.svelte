@@ -11,27 +11,30 @@ let viewHistory = false;
 let moveHistory = [];
 let lastMove = "Make a move!";
 let errorMessages = [];
-let showErrorMessage = false;
+let clickedError = "";
 
 function receiveMessage(event) {
   lastMove = event.detail;
-  console.log(lastMove);
   moveHistory = [lastMove ,...moveHistory];
 }
 
 function showError(event) {
   errorMessages = [...errorMessages, event.detail];
-  showErrorMessage = true;
 }
 
-function clearErrors() {
-  showErrorMessage = false;
-  errorMessages = [];
+function clearErrors(event) {
+  const error = event.target.innerText;
+  console.log(error);
+  errorMessages = errorMessages.filter(i => {
+    console.log(`inside filter: ${i}`);
+    return i !== error;
+  });
+  console.log(errorMessages);
 }
 
 </script>
 
-{#if showErrorMessage}
+{#if errorMessages}
   <Error messages={errorMessages}
     on:click={clearErrors} />
 {/if}
