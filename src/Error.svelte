@@ -8,9 +8,9 @@ export let messages = [];
 
 {#if messages}
   <div class="errors">
-    {#each messages as message}
+    {#each messages as message (message)}
       <section
-        transition:fly={{x: 900, duration: 500}}
+        transition:fly={{x: 900, duration: 300}}
         on:click>
           {message}
       </section>
