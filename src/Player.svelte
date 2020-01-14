@@ -13,26 +13,25 @@ const players = $playerStore;
 let selectPlayerPayPrompt = false;
 let selectPlayerCollectPrompt = false;
 let classes = "";
-// let potAmount;
 
 const otherPlayers = players.filter(
   player => player.name !== name
 );
 
-function pay(event) {
+function payPlayer(event) {
   const payer = name;
   const payee = event.detail.player;
   const amount = event.detail.amount;
   if (!amount) {
-    console.log("No amount");
-    return false;
-  }
-  // Move this logic to store
-  if (money < amount) {
-    console.log("Not enough money");
+    dispatch("error", "Please enter an amount");
     return false;
   }
   if (payee === 'all') {
+    let total = amount * otherPlayers.length
+    if (money < total) {
+      dispatch("error", `${name} does not have enough money for this transaction - $${total}`);
+      return false;
+    }
     for (const player of otherPlayers) {
       playerStore.payPlayer(
         payer,
@@ -41,6 +40,10 @@ function pay(event) {
       );
     }
   } else {
+    if (money < amount) {
+      dispatch("error", `${name} does not have enough money for this transaction`);
+      return false;
+    }
     playerStore.payPlayer(
       payer,
       payee,
@@ -51,47 +54,48 @@ function pay(event) {
   dispatch("send-message", `${name} paid ${payee} $${amount}`);
 }
 
-function collect(event) {
+function collectFrom(event) {
   const payer = event.detail.player;
   const payee = name;
   const amount = event.detail.amount;
   if (!amount) {
-    console.log("No amount");
+    dispatch("error", "Please enter an amount");
     return false;
   }
-  if (payer === 'all') {
-    for (const player of otherPlayers) {
+  for (const player of otherPlayers) {
+    if (player.money < amount) {
+      dispatch("error", `${player.name} does not have enough money for this transaction`);
+    } else {
       playerStore.payPlayer(
         player.name,
         payee,
         amount,
       );
     }
-  } else {
-    playerStore.payPlayer(
-      payer,
-      payee,
-      amount,
-  );
- }
+  }
   selectPlayerCollectPrompt = false;
   dispatch("send-message", `${name} collected $${amount} from ${payer}`);
 }
 
 function payPot(event) {
   const potAmount = event.detail.amount;
-  playerStore.pay(name, potAmount);
-  console.log(`${name} paid ${potAmount} to community pot`);
+  if (!potAmount) {
+    dispatch("error", "Please enter an amount");
+    return false;
+  }
+  if (money < potAmount) {
+    dispatch("error", `${name} does not have enough money for this transaction`);
+    return false;
+  }
   money -= potAmount;
+  playerStore.payPot(name, potAmount);
   potStore.payPot(potAmount);
   dispatch("send-message", `${name} put $${potAmount} into the Community Pot`);
   selectPlayerPayPrompt = false;
-  // potAmount = null;
 }
 
 function collectPot() {
-  playerStore.collect(name, $potStore);
-  console.log(`${name} collected ${$potStore} from community pot`);
+  playerStore.collectPot(name, $potStore);
   dispatch("send-message", `${name} collected $${$potStore} from the Community Pot`);
   money += $potStore;
   potStore.collectPot();
@@ -143,7 +147,7 @@ function collectPot() {
     <SelectPlayer
       players={otherPlayers}
       action="Pay"
-      on:transaction={pay}
+      on:transaction={payPlayer}
       on:transaction-pot={payPot}
       on:close-modal={() => selectPlayerPayPrompt = false}
     />
@@ -155,7 +159,7 @@ function collectPot() {
     <SelectPlayer
       players={otherPlayers}
       action="Collect"
-      on:transaction={collect}
+      on:transaction={collectFrom}
       on:transaction-pot={collectPot}
       on:close-modal={() => selectPlayerCollectPrompt = false}
     />
