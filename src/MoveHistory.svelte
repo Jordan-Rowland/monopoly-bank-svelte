@@ -2,9 +2,6 @@
 
 export let moveHistory;
 
-$: console.log(moveHistory);
-
-
 </script>
 
 <div class="container">

@@ -13,12 +13,6 @@ let selectPlayerPayPrompt = false;
 let selectPlayerCollectPrompt = false;
 let classes = "";
 
-// refactor this, no need for players variable
-// $: players = $playerStore;
-// $: otherPlayers = players.filter(
-//   player => player.name !== name
-// );
-
 $: otherPlayers = $playerStore.filter(
   player => player.name !== name
 );
@@ -32,7 +26,7 @@ function payPlayer(event) {
     return false;
   }
   if (payee === 'all') {
-    let total = amount * otherPlayers.length
+    let total = amount * otherPlayers.length;
     if (money < total) {
       dispatch("error", `${name} does not have enough money for this transaction - $${total}`);
       return false;
@@ -67,18 +61,26 @@ function collectFrom(event) {
     dispatch("error", "Please enter an amount");
     return false;
   }
-  dispatch("send-message", `${name} is collecting from all`);
-  for (const player of otherPlayers) {
-    if (player.money < amount) {
-      dispatch("error", `${player.name} does not have enough money for this transaction`);
-    } else {
-      playerStore.payPlayer(
-        player.name,
-        payee,
-        amount,
-      );
-      dispatch("send-message", `${name} collected $${amount} from ${player.name}`);
+  if (payer === "all") {
+    dispatch("send-message", `${name} is collecting from all`);
+    for (const player of otherPlayers) {
+      if (player.money < amount) {
+        dispatch("error", `${player.name} does not have enough money for this transaction`);
+      } else {
+        playerStore.payPlayer(
+          player.name,
+          payee,
+          amount,
+        );
+        dispatch("send-message", `${name} collected $${amount} from ${player.name}`);
+      }
     }
+  } else {
+    playerStore.payPlayer(
+      payer,
+      payee,
+      amount,
+    );
   }
   selectPlayerCollectPrompt = false;
 }
@@ -132,19 +134,6 @@ function collectPot() {
       </button>
     </div>
   </div>
-<!--   <div>
-    <input type="number" bind:value={potAmount}>
-    <button
-      on:click={payPot}>
-      Pay pot
-    </button>
-  </div> -->
-<!--   <div>
-    <button
-      on:click={collectPot}>
-      Collect pot(${$potStore})
-    </button>
-  </div> -->
 </section>
 
 <!-- Dynamic component here ?? -->
@@ -197,7 +186,7 @@ section {
   margin: 1.2rem;
   padding: .25rem 3rem;
   width: 45%;
-  height: 35%;
+  /*height: 50%;*/
 }
 
 #p1 {

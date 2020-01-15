@@ -24,12 +24,9 @@ function showError(event) {
 
 function clearErrors(event) {
   const error = event.target.innerText;
-  console.log(error);
   errorMessages = errorMessages.filter(i => {
-    console.log(`inside filter: ${i}`);
     return i !== error;
   });
-  console.log(errorMessages);
 }
 
 </script>
