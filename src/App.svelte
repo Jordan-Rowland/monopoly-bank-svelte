@@ -3,6 +3,7 @@ import Player from "./Player.svelte";
 import LastMove from "./LastMove.svelte";
 import MoveHistory from "./MoveHistory.svelte";
 import Error from "./Error.svelte";
+import ToolTip from "./ToolTip.svelte";
 
 import playerStore from "./player-store.js";
 
@@ -40,7 +41,7 @@ function clearErrors(event) {
 <header>
   <LastMove
     message={lastMove}
-    on:click={() => viewHistory = true}
+    on:click={() => viewHistory = !viewHistory}
   />
   {#if viewHistory}
     <MoveHistory
@@ -63,6 +64,9 @@ function clearErrors(event) {
     {/each}
   </section>
 </main>
+
+<ToolTip />
+
 <style>
 
 @media (max-width: 640px) {
