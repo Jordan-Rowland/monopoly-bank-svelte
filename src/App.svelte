@@ -50,7 +50,6 @@ function clearErrors(event) {
   {/if}
 </header>
 
-
 <main>
   <section>
     {#each $playerStore as player (player.id)}
@@ -64,8 +63,6 @@ function clearErrors(event) {
     {/each}
   </section>
 </main>
-
-<!-- <button on:click={() => showErrorMessage = !showErrorMessage}>Show Error</button> -->
 <style>
 
 @media (max-width: 640px) {

@@ -79,6 +79,13 @@ const playerStore = {
     });
   },
 
+  bankrupt: name => {
+    players.update(players => {
+      let updatedPlayers = [...players];
+      updatedPlayers = updatedPlayers.filter(player => player.name !== name);
+      return updatedPlayers;
+    });
+  }
 
 };
 

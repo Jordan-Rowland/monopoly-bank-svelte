@@ -110,13 +110,19 @@ function collectPot() {
   selectPlayerCollectPrompt = false;
 }
 
+function bankrupt() {
+  // prompt bankrupt confirmation
+  playerStore.bankrupt(name);
+}
+
 </script>
+
 
 <section id="p{id}">
   <div class="headers">
     <div>
       <h2>{name}</h2>
-      <h4>${money}</h4>
+      <h4 on:click={bankrupt}>${money}</h4>
     </div>
   </div>
 
@@ -184,9 +190,8 @@ section {
   align-items: stretch;
   border-radius: 4px;
   margin: 1.2rem;
-  padding: .25rem 3rem;
+  padding: .45rem 2rem;
   width: 45%;
-  /*height: 50%;*/
 }
 
 #p1 {
