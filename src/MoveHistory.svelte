@@ -34,7 +34,7 @@ export let moveHistory;
   width: 60%;
   top: 60px;
   background-color: hsla(215, 100%, 50%, 0.7);
-  color: hsl(215, 70%, 50%);
+  color: hsl(215, 70%, 85%);
   font-weight: 800;
   padding: 0.5rem;
 }
@@ -46,7 +46,6 @@ export let moveHistory;
 
 @media (max-width: 640px) {
   .moves {
-    /*font-size: 0.9rem;*/
     background-color: hsla(215, 100%, 50%, 0.85);
     color: hsl(215, 70%, 90%);
     width: 80%;
