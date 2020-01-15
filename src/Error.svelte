@@ -38,4 +38,13 @@ section {
   border-radius: 5px;
 }
 
+@media (max-width: 640px) {
+  .errors {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+}
+
 </style>

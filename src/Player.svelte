@@ -26,6 +26,7 @@ function payPlayer(event) {
     return false;
   }
   if (payee === 'all') {
+    dispatch("send-message", `${name} is paying all`);
     let total = amount * otherPlayers.length;
     if (money < total) {
       dispatch("error", `${name} does not have enough money for this transaction - $${total}`);
@@ -37,6 +38,8 @@ function payPlayer(event) {
         player.name,
         amount,
       );
+      dispatch("send-message", `${name} paid ${player.name} $${amount}`);
+
     }
   } else {
     if (money < amount) {
@@ -48,9 +51,9 @@ function payPlayer(event) {
       payee,
       amount,
     );
+    dispatch("send-message", `${name} paid ${payee} $${amount}`);
    }
   selectPlayerPayPrompt = false;
-  dispatch("send-message", `${name} paid ${payee} $${amount}`);
 }
 
 function collectFrom(event) {
@@ -113,6 +116,7 @@ function collectPot() {
 function bankrupt() {
   // prompt bankrupt confirmation
   playerStore.bankrupt(name);
+  dispatch("send-message", `${name} has gone bankrupt!`);
 }
 
 </script>
