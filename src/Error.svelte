@@ -28,13 +28,14 @@ export let messages = [];
 }
 
 section {
-  width: 20rem;
-  height: 3rem;
-  background-color: white;
-  border: 2px solid blue;
-  padding: 10px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  width: 22.3rem;
+  background-color: hsl(0, 75%, 60%);
+  color: hsl(0, 25%, 100%);
+  padding: 0.75rem;
   margin: 0.25rem 0;
-  border-radius: 3px;
+  border-radius: 5px;
 }
 
 </style>
