@@ -47,23 +47,25 @@ function closeModal() {
         </button>
       {/each}
     {/if}
-        <button
-          on:click={selectPlayer}>
-            {action} all
-        </button>
-        <button
-          on:click={selectPlayer}>
-            {action} bank
-        </button>
-        <button
-          on:click={selectPot}>
-            {action} Community Pot(${$potStore})
-        </button>
+    {#if players.length >1}
       <button
-        class="cancel-button"
-        on:click={closeModal}>
-          Cancel
+        on:click={selectPlayer}>
+          {action} all
       </button>
+    {/if}
+    <button
+      on:click={selectPlayer}>
+        {action} bank
+    </button>
+    <button
+      on:click={selectPot}>
+        {action} Community Pot(${$potStore})
+    </button>
+    <button
+      class="cancel-button"
+      on:click={closeModal}>
+        Cancel
+    </button>
   </section>
 </div>
 

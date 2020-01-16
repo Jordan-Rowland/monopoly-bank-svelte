@@ -2,6 +2,7 @@
 import { createEventDispatcher } from "svelte";
 const dispatch = createEventDispatcher();
 import SelectPlayer from "./SelectPlayer.svelte";
+import ConfirmBankrupt from "./ConfirmBankrupt.svelte";
 import playerStore from "./player-store.js";
 import potStore from "./pot-store.js";
 
@@ -11,6 +12,7 @@ export let money;
 
 let selectPlayerPayPrompt = false;
 let selectPlayerCollectPrompt = false;
+let confirmBankrupt = false;
 let classes = "";
 
 $: otherPlayers = $playerStore.filter(
@@ -113,7 +115,6 @@ function collectPot() {
 }
 
 function bankrupt() {
-  // prompt bankrupt confirmation
   playerStore.bankrupt(name);
   dispatch("send-message", `${name} has gone bankrupt!`);
 }
@@ -125,7 +126,7 @@ function bankrupt() {
   <div class="headers">
     <div>
       <h2>{name}</h2>
-      <h4 on:click={bankrupt}>${money}</h4>
+      <h4 on:click={() => confirmBankrupt = true}>${money}</h4>
     </div>
   </div>
 
@@ -168,6 +169,13 @@ function bankrupt() {
       on:close-modal={() => selectPlayerCollectPrompt = false}
     />
   </div>
+{/if}
+
+{#if confirmBankrupt}
+  <ConfirmBankrupt
+    on:bankrupt-user={bankrupt}
+    on:close-modal={() => confirmBankrupt = false}
+  />
 {/if}
 
 <style>
