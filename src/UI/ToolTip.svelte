@@ -22,7 +22,7 @@ export let message = "Click on a user's money to bankrupt";
 
 @media (max-width: 640px) {
   .tooltip {
-    width: 73%;
+    width: 72%;
   }
 }
 

@@ -41,7 +41,6 @@ function payPlayer(event) {
         amount,
       );
       dispatch("send-message", `${name} paid ${player.name} $${amount}`);
-
     }
   } else {
     if (money < amount) {

@@ -4,7 +4,6 @@ import BackDrop from "./UI/BackDrop.svelte";
 import { createEventDispatcher } from "svelte";
 const dispatch = createEventDispatcher();
 
-// export let name;
 export let message = "To declare bankruptcy, type 'BANKRUPT' in the field below";
 let verify;
 
@@ -32,14 +31,6 @@ function closeModal() {
 </div>
 
 <style>
-
-.container {
-  /*display: flex;*/
-  /*justify-content: center;*/
-  /*align-items: center;*/
-  /*position: absolute;*/
-  /*border: 2px solid red;*/
-}
 
 .card {
   z-index: 2;

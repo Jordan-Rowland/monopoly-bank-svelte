@@ -1,6 +1,5 @@
 <script>
 
-
 </script>
 
 <div id="black-drop" on:click></div>
