@@ -2,8 +2,8 @@
 import Player from "./Player.svelte";
 import LastMove from "./LastMove.svelte";
 import MoveHistory from "./MoveHistory.svelte";
-import Error from "./Error.svelte";
-import ToolTip from "./ToolTip.svelte";
+import Error from "./UI/Error.svelte";
+import ToolTip from "./UI/ToolTip.svelte";
 
 import playerStore from "./player-store.js";
 

@@ -1,4 +1,6 @@
 <script>
+import BackDrop from "./UI/BackDrop.svelte";
+
 import { createEventDispatcher } from "svelte";
 const dispatch = createEventDispatcher();
 
@@ -27,7 +29,8 @@ function closeModal() {
 
 </script>
 
-<div id="black-drop" on:click={closeModal}></div>
+<!-- <div id="black-drop" on:click={closeModal}></div> -->
+<BackDrop on:click={closeModal} />
 <div class="container">
   <section>
     <label>
@@ -66,17 +69,18 @@ function closeModal() {
 
 <style>
 
-#black-drop {
+/*#black-drop {
   position: absolute;
   background-color: hsla(0, 0%, 0%, .4);
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-}
+}*/
 
 section {
   position: absolute;
+  z-index: 2;
   top: 25%;
   left: 43%;
   display: flex;
@@ -99,9 +103,9 @@ input {
     justify-content: center;
   }
 
-  #black-drop {
+/*  #black-drop {
     display: none;
-  }
+  }*/
 
   .cancel-button {
     display: block;
