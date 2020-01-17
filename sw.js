@@ -56,6 +56,9 @@ self.addEventListener('activate', event => {
 
 // Network with cache fallback strategy
 self.addEventListener('fetch', event => {
+  if (event.request.cache === 'only-if-cached' && event.request.mode !== 'same-origin') {
+  return;
+  }
   event.respondWith(
     fetch(event.request)
      .then(res => {
