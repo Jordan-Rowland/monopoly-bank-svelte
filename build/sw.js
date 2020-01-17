@@ -2,7 +2,7 @@ const CACHE_VERSION = 1;
 const CACHE_STATIC_NAME  = `static-v${CACHE_VERSION}`;
 const CACHE_DYNAMIC_NAME  = `dynamic-v${CACHE_VERSION}`;
 const STATIC_FILES = [
-  '/',
+  './',
   './bundle.css',
   './bundle.js',
   './bundle.css.map',
