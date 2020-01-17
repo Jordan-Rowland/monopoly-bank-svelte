@@ -2,7 +2,7 @@
   "name": "Monopoly Bank",
   "short_name": "MBank",
   "description": "Banking app for Monopoly board game",
-  "theme_color": "#7cb3df",
+  "theme_color": "#D9998C",
   "icons": [
     {
       "src": "./icon-512.png",
