@@ -17,18 +17,22 @@
 </head>
 <body>
 </body>
+	<noscript>
+  <p>No JavaScript!</p>
+	</noscript>
+	
 	<script>
 	
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker
-    .register("./sw.js", {scope: './'})
-    .then(registration => {
-      console.log("ServiceWorker running");
-    })
-    .catch(err => {
-       console.log(err);
-    })
-}
+	if ('serviceWorker' in navigator) {
+		navigator.serviceWorker
+			.register("./sw.js", {scope: './'})
+			.then(registration => {
+				console.log("ServiceWorker running");
+			})
+			.catch(err => {
+				 console.log(err);
+			})
+	}
 					
 	</script>
 	
