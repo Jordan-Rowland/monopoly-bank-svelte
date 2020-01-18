@@ -1,6 +1,6 @@
 <script>
 
-export let players;
+export let players = [];
 
 </script>
 
