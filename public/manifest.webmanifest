@@ -13,6 +13,6 @@
   "background_color": "#b1c6d7",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "start_url": "/monopoly-bank-svelte/public",
+  "start_url": "/monopoly-bank-svelte/public/",
   "scope": "."
 }
