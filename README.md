@@ -1,5 +1,8 @@
 # Digital Monopoly Bank
 
+Check out a live example of this project here:
+https://jordan-rowland.github.io/monopoly-bank-svelte/public/
+
 ![](https://i.imgur.com/H7ZDKBI.png)
 
 ## Update 01/18:
