@@ -3,6 +3,8 @@ const CACHE_STATIC_NAME  = `static-v${CACHE_VERSION}`;
 const CACHE_DYNAMIC_NAME  = `dynamic-v${CACHE_VERSION}`;
 const STATIC_FILES = [
   './',
+  './global.css',
+  './icon-512.png',
   './build/bundle.css',
   './build/bundle.js',
   './build/bundle.css.map',
