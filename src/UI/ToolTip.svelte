@@ -26,5 +26,11 @@ export let message = "Click on a user's money to bankrupt";
   }
 }
 
+@media (max-width: 360px) {
+  .tooltip {
+    width: 76%;
+  }
+}
+
 
 </style>

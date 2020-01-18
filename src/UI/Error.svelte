@@ -40,11 +40,22 @@ section {
 
 @media (max-width: 640px) {
   .errors {
+    top: 15;
+    right: 0;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
   }
+
+  section {
+  font-size: 0.9rem;
+  font-weight: 800;
+  width: 80%;
+  }
+
 }
+
 
 </style>
