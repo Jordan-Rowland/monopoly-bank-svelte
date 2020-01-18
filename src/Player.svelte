@@ -235,6 +235,7 @@ button {
   border-radius: 3px;
   background-color: hsla(0, 100%, 100%, 0.5);
   border-color: hsla(0, 0%, 0%, 0.4);
+  height: 3rem;
 }
 
 .buttons {
@@ -262,7 +263,6 @@ input {
     flex-direction: row;
     justify-content: flex-end;
     margin: 1rem 0 1rem 2rem;
-    /*margin-left: 2rem;*/
   }
 
   button {
@@ -271,13 +271,35 @@ input {
     margin: 0 0.2rem;
   }
 
-
 }
 
-@media (min-width: 640px) {
-  button {
-    height: 3rem;
+@media (max-width: 360px) {
+  .buttons {
+    position: absolute;
+    left: 130px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin: 1rem 0 1rem 2rem;
   }
+
+  section {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0.3rem;
+    padding: 0 0.8rem;
+    /*height: 10%;*/
+  }
+
+  h2, h4 {
+    margin: 0.8rem;
+  }
+
+  button {
+    height: 3.5rem;
+  }
+
 }
 
 </style>
