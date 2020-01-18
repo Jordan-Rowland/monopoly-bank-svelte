@@ -71,15 +71,6 @@ function closeModal() {
 
 <style>
 
-/*#black-drop {
-  position: absolute;
-  background-color: hsla(0, 0%, 0%, .4);
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-}*/
-
 section {
   position: absolute;
   z-index: 2;
@@ -104,10 +95,6 @@ input {
     display: flex;
     justify-content: center;
   }
-
-/*  #black-drop {
-    display: none;
-  }*/
 
   .cancel-button {
     display: block;

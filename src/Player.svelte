@@ -173,6 +173,7 @@ function bankrupt() {
 
 {#if confirmBankrupt}
   <ConfirmBankrupt
+    {name}
     on:bankrupt-user={bankrupt}
     on:close-modal={() => confirmBankrupt = false}
   />
