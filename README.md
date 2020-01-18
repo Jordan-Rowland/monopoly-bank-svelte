@@ -1,8 +1,9 @@
 # Digital Monopoly Bank
 
-![](https://i.imgur.com/m86mnhO.png)
+![](https://i.imgur.com/H7ZDKBI.png)
 
-WIP banking system for the board game Monopoly.
+## Update 01/18:
+Monopoly Bank is now a fully offline capable PWA. Upon first opening the page, Monopoly Bank will ask you to install to homescreen, and cache all all componenets of making the app operational in an offline state. 
 
 TODO: 
 * Start custom game feature(for reviving a previous game)
