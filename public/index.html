@@ -1,18 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset='utf-8'>
-	<meta name='viewport' content='width=device-width,initial-scale=1'>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
 
-	<title>Svelte app</title>
+  <title>Monopoly Bank</title>
 
-	<link rel='icon' type='image/png' href='/favicon.png'>
-	<link rel='stylesheet' href='./global.css'>
-	<link rel='stylesheet' href='./build/bundle.css'>
+  <meta name="theme-color" content="#D9998C">
 
-	<script defer src='./build/bundle.js'></script>
+  <link rel='icon' type='image/png' href='/favicon.png'>
+  <link rel='stylesheet' href='./global.css'>
+  <link rel='stylesheet' href='./build/bundle.css'>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <script defer src='./build/bundle.js'></script>
+  <script src="./sw.js"></script>
 </head>
-
 <body>
 </body>
+  <noscript>
+  <p>No JavaScript!</p>
+  </noscript>
+
+  <script>
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+      .register("./sw.js", {scope: './'})
+      .then(registration => {
+        console.log("ServiceWorker running");
+      })
+      .catch(err => {
+         console.log(err);
+      });
+  }
+
+  </script>
+
 </html>
