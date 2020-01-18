@@ -289,7 +289,6 @@ input {
     width: 80%;
     margin: 0.3rem;
     padding: 0 0.8rem;
-    /*height: 10%;*/
   }
 
   h2, h4 {
