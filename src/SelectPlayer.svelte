@@ -9,6 +9,8 @@ import potStore from "./pot-store.js";
 export let players;
 export let action;
 
+$: console.log(players);
+
 let player;
 let amount;
 let placeholder = `Amount to ${action}`;
@@ -16,6 +18,7 @@ let placeholder = `Amount to ${action}`;
 function selectPlayer(event) {
   let innerText = event.target.innerText;
   player = innerText.split(" ")[1];
+  console.log(player);
   dispatch('transaction', {player: player, amount: amount});
 }
 
@@ -29,7 +32,6 @@ function closeModal() {
 
 </script>
 
-<!-- <div id="black-drop" on:click={closeModal}></div> -->
 <BackDrop on:click={closeModal} />
 <div class="container">
   <section>
@@ -47,10 +49,15 @@ function closeModal() {
         </button>
       {/each}
     {/if}
-    {#if players.length >1}
+    {#if players.length > 1}
       <button
         on:click={selectPlayer}>
           {action} all
+      </button>
+    {:else}
+      <button
+        on:click={selectPlayer}>
+          {action} {players[0].name}
       </button>
     {/if}
     <button

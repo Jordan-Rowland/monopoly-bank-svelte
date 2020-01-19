@@ -8,12 +8,12 @@ import playerStore from "./player-store.js";
 let players = [
   {
     id: 1,
-    name: "",
+    name: "Marvinwqe",
     money: 1500
   },
   {
     id: 2,
-    name: "",
+    name: "Marvin",
     money: 1500
   },
   {
@@ -48,21 +48,24 @@ let players = [
   }
 ];
 
-let numOfPlayers = 4;
+let numOfPlayers = 2;
 
-$: console.log($playerStore);
 
 function initializeGame() {
   const existingPlayers = players.filter(player => {
-    return player.name;
+    if (player.name &&
+        typeof player.money === 'number') {
+      return player.name;
+    }
   });
-  if (existingPlayers.length > 1 &&
-      existingPlayers.length < 9) {
-    playerStore.setPlayers(existingPlayers);
-    dispatch("initialize-game");
-  } else {
+  if (existingPlayers.length < 2 ||
+      existingPlayers.length > 8 ||
+      existingPlayers.length !== numOfPlayers) {
     dispatch("error", "Wrong number of players");
     return false;
+  } else {
+    playerStore.setPlayers(existingPlayers);
+    dispatch("initialize-game");
   }
 }
 
@@ -100,7 +103,7 @@ function initializeGame() {
 
 .container {
   width: 80%;
-  margin: 10rem auto;
+  margin: 4rem auto;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -119,6 +122,7 @@ article {
 }
 
 button {
+  margin-top: 30px;
   width: 60%;
   height: 3rem;
 }

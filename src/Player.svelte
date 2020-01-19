@@ -65,26 +65,18 @@ function collectFrom(event) {
     dispatch("error", "Please enter an amount");
     return false;
   }
-  if (payer === "all") {
-    dispatch("send-message", `${name} is collecting from all`);
-    for (const player of otherPlayers) {
-      if (player.money < amount) {
-        dispatch("error", `${player.name} does not have enough money for this transaction`);
-      } else {
-        playerStore.payPlayer(
-          player.name,
-          payee,
-          amount,
-        );
-        dispatch("send-message", `${name} collected $${amount} from ${player.name}`);
-      }
+  dispatch("send-message", `${name} is collecting from all`);
+  for (const player of otherPlayers) {
+    if (player.money < amount) {
+      dispatch("error", `${player.name} does not have enough money for this transaction`);
+    } else {
+      playerStore.payPlayer(
+        player.name,
+        payee,
+        amount,
+      );
+      dispatch("send-message", `${name} collected $${amount} from ${player.name}`);
     }
-  } else {
-    playerStore.payPlayer(
-      payer,
-      payee,
-      amount,
-    );
   }
   selectPlayerCollectPrompt = false;
 }
@@ -133,14 +125,28 @@ function bankrupt() {
   <div class="buttons">
     <div>
       <button
+        class="normal-button"
         on:click={() => selectPlayerPayPrompt = true}>
         Pay Player
       </button>
     </div>
     <div>
       <button
+        class="normal-button"
         on:click={() => selectPlayerCollectPrompt = true}>
         Collect Money
+      </button>
+      <button
+        class="small-button"
+        on:click={() => selectPlayerPayPrompt = true}>
+        P
+      </button>
+    </div>
+    <div>
+      <button
+        class="small-button"
+        on:click={() => selectPlayerCollectPrompt = true}>
+        C
       </button>
     </div>
   </div>
@@ -181,20 +187,9 @@ function bankrupt() {
 
 <style>
 
-:root {
-  --p1-bg-color: hsl(210, 100%, 95%);
-  --p1-border-color: hsl(210, 100%, 80%);
-  --p1-text-color: hsl(210, 100%, 25%);
-  --p2-bg-color: hsl(160, 100%, 95%);
-  --p2-border-color: hsl(160, 100%, 80%);
-  --p2-text-color: hsl(160, 100%, 25%);
-  --p3-bg-color: hsl(110, 100%, 95%);
-  --p3-border-color: hsl(110, 100%, 80%);
-  --p3-text-color: hsl(110, 100%, 25%);
-  --p4-bg-color: hsl(260, 100%, 95%);
-  --p4-border-color: hsl(260, 100%, 80%);
-  --p4-text-color: hsl(260, 100%, 25%);
-}
+/*.headers {
+  position: relative;
+}*/
 
 section {
   display: flex;
@@ -204,30 +199,6 @@ section {
   margin: 1.2rem;
   padding: .45rem 2rem;
   width: 45%;
-}
-
-#p1 {
-  background-color: var(--p1-bg-color);
-  border: 1.7px solid var(--p1-border-color);
-  color: var(--p1-text-color);
-}
-
-#p2 {
-  background-color: var(--p2-bg-color);
-  border: 1.7px solid var(--p2-border-color);
-  color: var(--p2-text-color);
-}
-
-#p3 {
-  background-color: var(--p3-bg-color);
-  border: 1.7px solid var(--p3-border-color);
-  color: var(--p3-text-color);
-}
-
-#p4 {
-  background-color: var(--p4-bg-color);
-  border: 1.7px solid var(--p4-border-color);
-  color: var(--p4-text-color);
 }
 
 button {
@@ -248,6 +219,10 @@ input {
   border-color: hsla(0, 0%, 0%, 0.4);
 }
 
+.small-button {
+  display: none;
+}
+
 @media (max-width: 640px) {
   section {
     flex-direction: row;
@@ -259,6 +234,8 @@ input {
   }
 
   .buttons {
+    position: absolute;
+    right: 50px;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -276,11 +253,12 @@ input {
 @media (max-width: 360px) {
   .buttons {
     position: absolute;
-    left: 130px;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    margin: 1rem 0 1rem 2rem;
+    right: 50px;
+    /*left: 130px;*/
+    /*display: flex;*/
+    /*flex-direction: row;*/
+    /*justify-content: flex-end;*/
+    /*margin: 1rem 0 1rem 2rem;*/
   }
 
   section {
@@ -299,6 +277,84 @@ input {
     height: 3.5rem;
   }
 
+}
+
+@media (max-width: 320px) {
+
+  .buttons {
+    right: 40px;
+    margin-top: 23px;
+  }
+
+  .normal-button {
+    display: none;
+  }
+
+  .small-button {
+    display: block;
+    width: 2.3rem;
+    height: 2.3rem;
+  }
+
+}
+
+:root {
+  --p1-color: 45;
+  --p2-color: 90;
+  --p3-color: 135;
+  --p4-color: 180;
+  --p5-color: 225;
+  --p6-color: 270;
+  --p7-color: 315;
+  --p8-color: 360;
+}
+
+#p1 {
+  background-color: hsl(var(--p1-color), 100%, 95%);
+  border: 1.7px solid hsl(var(--p1-color), 100%, 80%);
+  color: hsl(var(--p1-color), 100%, 25%);
+}
+
+#p2 {
+  background-color: hsl(var(--p2-color), 100%, 95%);
+  border: 1.7px solid hsl(var(--p2-color), 100%, 80%);
+  color: hsl(var(--p2-color), 100%, 25%);
+}
+
+#p3 {
+  background-color: hsl(var(--p3-color), 100%, 95%);
+  border: 1.7px solid hsl(var(--p3-color), 100%, 80%);
+  color: hsl(var(--p3-color), 100%, 25%);
+}
+
+#p4 {
+  background-color: hsl(var(--p4-color), 100%, 95%);
+  border: 1.7px solid hsl(var(--p4-color), 100%, 80%);
+  color: hsl(var(--p4-color), 100%, 25%);
+}
+
+#p5 {
+  background-color: hsl(var(--p5-color), 100%, 95%);
+  border: 1.7px solid hsl(var(--p5-color), 100%, 80%);
+  color: hsl(var(--p5-color), 100%, 25%);
+}
+
+#p6 {
+  background-color: hsl(var(--p6-color), 100%, 95%);
+  border: 1.7px solid hsl(var(--p6-color), 100%, 80%);
+  color: hsl(var(--p6-color), 100%, 25%);
+}
+
+#p7 {
+  background-color: hsl(var(--p7-color), 100%, 95%);
+  border: 1.7px solid hsl(var(--p7-color), 100%, 80%);
+  color: hsl(var(--p7-color), 100%, 25%);
+}
+
+#p8 {
+  background-color: hsl(var(--p8-color), 100%, 95%);
+  border: 1.7px solid hsl(var(--p8-color), 100%, 80%);
+  color: hsl(var(--p8-color), 100%, 25%);
 }
 
 </style>
