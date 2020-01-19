@@ -9,22 +9,22 @@ import potStore from "./pot-store.js";
 export let players;
 export let action;
 
-$: console.log(players);
-
 let player;
 let amount;
 let placeholder = `Amount to ${action}`;
 
+
 function selectPlayer(event) {
   let innerText = event.target.innerText;
   player = innerText.split(" ")[1];
-  console.log(player);
   dispatch('transaction', {player: player, amount: amount});
 }
+
 
 function selectPot(event) {
   dispatch('transaction-pot', {amount: amount});
 }
+
 
 function closeModal() {
   dispatch("close-modal");
