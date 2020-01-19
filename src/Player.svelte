@@ -10,8 +10,20 @@ export let id;
 export let name;
 export let money;
 
-let selectPlayerPayPrompt = false;
-let selectPlayerCollectPrompt = false;
+const promptComponents = {
+  payPrompt: {
+    action: "Pay",
+    transaction: payPlayer,
+    transactionPot: payPot,
+  },
+  collectPrompt: {
+    action: "Collect",
+    transaction: collectFrom,
+    transactionPot: collectPot,
+  }
+};
+
+let prompt = false;
 let confirmBankrupt = false;
 let classes = "";
 
@@ -56,7 +68,7 @@ function payPlayer(event) {
     );
     dispatch("send-message", `${name} paid ${payee} $${amount}`);
    }
-  selectPlayerPayPrompt = false;
+  prompt = false;
 }
 
 
@@ -68,20 +80,29 @@ function collectFrom(event) {
     dispatch("error", "Please enter an amount");
     return false;
   }
-  dispatch("send-message", `${name} is collecting from all`);
-  for (const player of otherPlayers) {
-    if (player.money < amount) {
-      dispatch("error", `${player.name} does not have enough money for this transaction`);
-    } else {
-      playerStore.payPlayer(
-        player.name,
-        payee,
-        amount,
-      );
-      dispatch("send-message", `${name} collected $${amount} from ${player.name}`);
+  if (payer === "all") {
+    dispatch("send-message", `${name} is collecting from all`);
+    for (const player of otherPlayers) {
+      if (player.money < amount) {
+        dispatch("error", `${player.name} does not have enough money for this transaction`);
+      } else {
+        playerStore.payPlayer(
+          player.name,
+          payee,
+          amount,
+        );
+        dispatch("send-message", `${name} collected $${amount} from ${player.name}`);
+      }
     }
+  } else {
+    playerStore.payPlayer(
+      payer,
+      payee,
+      amount,
+    );
+    dispatch("send-message", `${name} collected $${amount} from ${payer}`);
   }
-  selectPlayerCollectPrompt = false;
+  prompt = false;
 }
 
 
@@ -99,7 +120,7 @@ function payPot(event) {
   playerStore.payPot(name, potAmount);
   potStore.payPot(potAmount);
   dispatch("send-message", `${name} put $${potAmount} into the Community Pot`);
-  selectPlayerPayPrompt = false;
+  prompt = false;
 }
 
 
@@ -108,7 +129,7 @@ function collectPot() {
   dispatch("send-message", `${name} collected $${$potStore} from the Community Pot`);
   money += $potStore;
   potStore.collectPot();
-  selectPlayerCollectPrompt = false;
+  prompt = false;
 }
 
 
@@ -132,53 +153,40 @@ function bankrupt() {
     <div>
       <button
         class="normal-button"
-        on:click={() => selectPlayerPayPrompt = true}>
+        on:click={() => prompt = promptComponents.payPrompt}>
         Pay Player
       </button>
     </div>
     <div>
       <button
         class="normal-button"
-        on:click={() => selectPlayerCollectPrompt = true}>
+        on:click={() => prompt = promptComponents.collectPrompt}>
         Collect Money
       </button>
       <button
         class="small-button"
-        on:click={() => selectPlayerPayPrompt = true}>
+        on:click={() => prompt = promptComponents.payPrompt}>
         P
       </button>
     </div>
     <div>
       <button
         class="small-button"
-        on:click={() => selectPlayerCollectPrompt = true}>
+        on:click={() => prompt = promptComponents.collectPrompt}>
         C
       </button>
     </div>
   </div>
 </section>
 
-<!-- Dynamic component here ?? -->
-{#if selectPlayerPayPrompt}
+{#if prompt}
   <div class="select-player">
     <SelectPlayer
       players={otherPlayers}
-      action="Pay"
-      on:transaction={payPlayer}
-      on:transaction-pot={payPot}
-      on:close-modal={() => selectPlayerPayPrompt = false}
-    />
-  </div>
-{/if}
-
-{#if selectPlayerCollectPrompt}
-  <div class="select-player">
-    <SelectPlayer
-      players={otherPlayers}
-      action="Collect"
-      on:transaction={collectFrom}
-      on:transaction-pot={collectPot}
-      on:close-modal={() => selectPlayerCollectPrompt = false}
+      action={prompt.action}
+      on:transaction={prompt.transaction}
+      on:transaction-pot={prompt.transactionPot}
+      on:close-modal={() => prompt = false}
     />
   </div>
 {/if}
@@ -192,10 +200,6 @@ function bankrupt() {
 {/if}
 
 <style>
-
-/*.headers {
-  position: relative;
-}*/
 
 section {
   display: flex;
