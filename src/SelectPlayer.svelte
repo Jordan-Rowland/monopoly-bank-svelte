@@ -54,7 +54,7 @@ function closeModal() {
         on:click={selectPlayer}>
           {action} all
       </button>
-    {:else}
+    {:else if action === "Collect"}
       <button
         on:click={selectPlayer}>
           {action} {players[0].name}

@@ -19,6 +19,8 @@ $: otherPlayers = $playerStore.filter(
   player => player.name !== name
 );
 
+$: console.log(otherPlayers);
+
 function payPlayer(event) {
   const payer = name;
   const payee = event.detail.player;
