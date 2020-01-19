@@ -2,31 +2,35 @@ import { writable } from 'svelte/store';
 
 
 const players = writable([
-  {
-    id: 1,
-    name: "Michael",
-    money: 2000,
-  },
-  {
-    id: 2,
-    name: "Jan",
-    money: 1500,
-  },
-  {
-    id: 3,
-    name: "Dwight",
-    money: 1000,
-  },
-  {
-    id: 4,
-    name: "Oscar",
-    money: 500,
-  },
+  // {
+  //   id: 1,
+  //   name: "Michael",
+  //   money: 2000,
+  // },
+  // {
+  //   id: 2,
+  //   name: "Jan",
+  //   money: 1500,
+  // },
+  // {
+  //   id: 3,
+  //   name: "Dwight",
+  //   money: 1000,
+  // },
+  // {
+  //   id: 4,
+  //   name: "Oscar",
+  //   money: 500,
+  // },
 ]);
 
 
 const playerStore = {
   subscribe: players.subscribe,
+
+  setPlayers: existingPlayers => {
+    players.set(existingPlayers);
+  },
 
   payPot: (name, amount) => {
     players.update(items => {

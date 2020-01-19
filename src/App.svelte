@@ -4,6 +4,7 @@ import LastMove from "./LastMove.svelte";
 import MoveHistory from "./MoveHistory.svelte";
 import Error from "./UI/Error.svelte";
 import ToolTip from "./UI/ToolTip.svelte";
+import StartGame from "./StartGame.svelte";
 
 import playerStore from "./player-store.js";
 
@@ -13,15 +14,19 @@ let moveHistory = [];
 let lastMove = "Make a move!";
 let errorMessages = [];
 let clickedError = "";
+let startGamePrompt = true;
+
 
 function receiveMessage(event) {
   lastMove = event.detail;
   moveHistory = [lastMove ,...moveHistory];
 }
 
+
 function showError(event) {
   errorMessages = [...errorMessages, event.detail];
 }
+
 
 function clearErrors(event) {
   const error = event.target.innerText;
@@ -36,6 +41,11 @@ function clearErrors(event) {
   <Error messages={errorMessages}
     on:click={clearErrors} />
 {/if}
+{#if startGamePrompt}
+  <StartGame
+    on:error={showError}
+    on:initialize-game={() => startGamePrompt = false} />
+{:else}
 
 
 <header>
@@ -66,6 +76,7 @@ function clearErrors(event) {
 </main>
 
 <ToolTip />
+{/if}
 
 <style>
 
