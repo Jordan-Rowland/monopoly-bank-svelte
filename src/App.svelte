@@ -11,7 +11,7 @@ import playerStore from "./player-store.js";
 
 let viewHistory = false;
 let moveHistory = [];
-let lastMove = "Make a move!";
+let lastMove = "Click a player's money to bankrupt them";
 let errorMessages = [];
 let clickedError = "";
 let startGamePrompt = true;
@@ -75,7 +75,7 @@ function clearErrors(event) {
   </section>
 </main>
 
-<ToolTip />
+<!-- <ToolTip /> -->
 {/if}
 
 <style>

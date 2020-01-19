@@ -27,12 +27,4 @@ div {
   font-weight: 800;
 }
 
-
-@media only screen and (max-width: 640px) {
-  div {
-    /*font-size: 0.9rem;*/
-  }
-}
-
-
 </style>
