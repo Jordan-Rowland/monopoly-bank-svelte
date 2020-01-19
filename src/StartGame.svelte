@@ -8,12 +8,12 @@ import playerStore from "./player-store.js";
 let players = [
   {
     id: 1,
-    name: "Marvinwqe",
+    name: "",
     money: 1500
   },
   {
     id: 2,
-    name: "Marvin",
+    name: "",
     money: 1500
   },
   {
