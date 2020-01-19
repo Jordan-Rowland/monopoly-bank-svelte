@@ -1,28 +1,7 @@
 import { writable } from 'svelte/store';
 
 
-const players = writable([
-  // {
-  //   id: 1,
-  //   name: "Michael",
-  //   money: 2000,
-  // },
-  // {
-  //   id: 2,
-  //   name: "Jan",
-  //   money: 1500,
-  // },
-  // {
-  //   id: 3,
-  //   name: "Dwight",
-  //   money: 1000,
-  // },
-  // {
-  //   id: 4,
-  //   name: "Oscar",
-  //   money: 500,
-  // },
-]);
+const players = writable([]);
 
 
 const playerStore = {

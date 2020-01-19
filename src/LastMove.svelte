@@ -13,6 +13,7 @@ export let message;
 <style>
 
 div {
+  z-index: 2;
   position: fixed;
   display: flex;
   justify-content: center;

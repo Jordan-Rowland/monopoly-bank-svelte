@@ -53,13 +53,13 @@ function clearErrors(event) {
     message={lastMove}
     on:click={() => viewHistory = !viewHistory}
   />
+</header>
   {#if viewHistory}
     <MoveHistory
       moveHistory={moveHistory}
       on:click={() => viewHistory = false}
     />
   {/if}
-</header>
 
 <main>
   <section>
@@ -74,8 +74,6 @@ function clearErrors(event) {
     {/each}
   </section>
 </main>
-
-<!-- <ToolTip /> -->
 {/if}
 
 <style>

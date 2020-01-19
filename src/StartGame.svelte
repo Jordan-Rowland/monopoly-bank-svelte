@@ -54,13 +54,12 @@ let numOfPlayers = 2;
 function initializeGame() {
   const existingPlayers = players.filter(player => {
     if (player.name &&
-        typeof player.money === 'number') {
+        typeof player.money === 'number' &&
+        player.money > 1) {
       return player.name;
     }
   });
-  if (existingPlayers.length < 2 ||
-      existingPlayers.length > 8 ||
-      existingPlayers.length !== numOfPlayers) {
+  if (existingPlayers.length !== numOfPlayers) {
     dispatch("error", "Wrong number of players");
     return false;
   } else {
@@ -77,7 +76,7 @@ function initializeGame() {
     How many players? <br>
     <input type="number" bind:value={numOfPlayers}>
   </label>
-  <hr>
+  <br>
   {#if numOfPlayers < 2 || numOfPlayers > 8 || !numOfPlayers}
     <p>Please select a number of players between 2 and 8</p>
   {:else}

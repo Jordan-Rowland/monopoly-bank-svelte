@@ -15,11 +15,11 @@ let selectPlayerCollectPrompt = false;
 let confirmBankrupt = false;
 let classes = "";
 
+
 $: otherPlayers = $playerStore.filter(
   player => player.name !== name
 );
 
-$: console.log(otherPlayers);
 
 function payPlayer(event) {
   const payer = name;
@@ -59,6 +59,7 @@ function payPlayer(event) {
   selectPlayerPayPrompt = false;
 }
 
+
 function collectFrom(event) {
   const payer = event.detail.player;
   const payee = name;
@@ -83,6 +84,7 @@ function collectFrom(event) {
   selectPlayerCollectPrompt = false;
 }
 
+
 function payPot(event) {
   const potAmount = event.detail.amount;
   if (!potAmount) {
@@ -100,6 +102,7 @@ function payPot(event) {
   selectPlayerPayPrompt = false;
 }
 
+
 function collectPot() {
   playerStore.collectPot(name, $potStore);
   dispatch("send-message", `${name} collected $${$potStore} from the Community Pot`);
@@ -107,6 +110,7 @@ function collectPot() {
   potStore.collectPot();
   selectPlayerCollectPrompt = false;
 }
+
 
 function bankrupt() {
   playerStore.bankrupt(name);
