@@ -37,7 +37,7 @@ function payPlayer(event) {
   const payer = name;
   const payee = event.detail.player;
   const amount = event.detail.amount;
-  if (!amount) {
+  if (!amount || amount < 1) {
     dispatch("error", "Please enter an amount");
     return false;
   }
@@ -76,7 +76,7 @@ function collectFrom(event) {
   const payer = event.detail.player;
   const payee = name;
   const amount = event.detail.amount;
-  if (!amount) {
+  if (!amount || amount < 1) {
     dispatch("error", "Please enter an amount");
     return false;
   }
@@ -95,6 +95,14 @@ function collectFrom(event) {
       }
     }
   } else {
+    let payerPlayer = otherPlayers.filter(player => payer === player.name);
+    if (payerPlayer) {
+      payerPlayer = payerPlayer[0]
+    }
+    if (payerPlayer.money < amount) {
+        dispatch("error", `${payer} does not have enough money for this transaction`);
+        return false;
+      }
     playerStore.payPlayer(
       payer,
       payee,
@@ -108,7 +116,7 @@ function collectFrom(event) {
 
 function payPot(event) {
   const potAmount = event.detail.amount;
-  if (!potAmount) {
+  if (!potAmount || potAmount < 1) {
     dispatch("error", "Please enter an amount");
     return false;
   }
@@ -264,11 +272,6 @@ input {
   .buttons {
     position: absolute;
     right: 50px;
-    /*left: 130px;*/
-    /*display: flex;*/
-    /*flex-direction: row;*/
-    /*justify-content: flex-end;*/
-    /*margin: 1rem 0 1rem 2rem;*/
   }
 
   section {
@@ -322,49 +325,49 @@ input {
 #p1 {
   background-color: hsl(var(--p1-color), 100%, 95%);
   border: 1.7px solid hsl(var(--p1-color), 100%, 80%);
-  color: hsl(var(--p1-color), 100%, 25%);
+  color: hsla(var(--p1-color), 100%, 25%, 0.8);
 }
 
 #p2 {
   background-color: hsl(var(--p2-color), 100%, 95%);
   border: 1.7px solid hsl(var(--p2-color), 100%, 80%);
-  color: hsl(var(--p2-color), 100%, 25%);
+  color: hsla(var(--p2-color), 100%, 25%, 0.8);
 }
 
 #p3 {
   background-color: hsl(var(--p3-color), 100%, 95%);
   border: 1.7px solid hsl(var(--p3-color), 100%, 80%);
-  color: hsl(var(--p3-color), 100%, 25%);
+  color: hsla(var(--p3-color), 100%, 25%, 0.8);
 }
 
 #p4 {
   background-color: hsl(var(--p4-color), 100%, 95%);
   border: 1.7px solid hsl(var(--p4-color), 100%, 80%);
-  color: hsl(var(--p4-color), 100%, 25%);
+  color: hsla(var(--p4-color), 100%, 25%, 0.8);
 }
 
 #p5 {
   background-color: hsl(var(--p5-color), 100%, 95%);
   border: 1.7px solid hsl(var(--p5-color), 100%, 80%);
-  color: hsl(var(--p5-color), 100%, 25%);
+  color: hsla(var(--p5-color), 100%, 25%, 0.8);
 }
 
 #p6 {
   background-color: hsl(var(--p6-color), 100%, 95%);
   border: 1.7px solid hsl(var(--p6-color), 100%, 80%);
-  color: hsl(var(--p6-color), 100%, 25%);
+  color: hsla(var(--p6-color), 100%, 25%, 0.8);
 }
 
 #p7 {
   background-color: hsl(var(--p7-color), 100%, 95%);
   border: 1.7px solid hsl(var(--p7-color), 100%, 80%);
-  color: hsl(var(--p7-color), 100%, 25%);
+  color: hsla(var(--p7-color), 100%, 25%, 0.8);
 }
 
 #p8 {
   background-color: hsl(var(--p8-color), 100%, 95%);
   border: 1.7px solid hsl(var(--p8-color), 100%, 80%);
-  color: hsl(var(--p8-color), 100%, 25%);
+  color: hsla(var(--p8-color), 100%, 25%, 0.8);
 }
 
 </style>
