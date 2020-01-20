@@ -95,20 +95,29 @@ function collectFrom(event) {
       }
     }
   } else {
-    let payerPlayer = otherPlayers.filter(player => payer === player.name);
-    if (payerPlayer) {
-      payerPlayer = payerPlayer[0]
-    }
-    if (payerPlayer.money < amount) {
-        dispatch("error", `${payer} does not have enough money for this transaction`);
-        return false;
+    if (payer === 'bank') {
+      playerStore.payPlayer(
+        payer,
+        payee,
+        amount,
+      );
+      dispatch("send-message", `${name} collected $${amount} from ${payer}`);
+    } else {
+      let payerPlayer = otherPlayers.filter(player => payer === player.name);
+      if (payerPlayer) {
+        payerPlayer = payerPlayer[0];
       }
-    playerStore.payPlayer(
-      payer,
-      payee,
-      amount,
-    );
-    dispatch("send-message", `${name} collected $${amount} from ${payer}`);
+      if (payerPlayer.money < amount) {
+          dispatch("error", `${payer} does not have enough money for this transaction`);
+          return false;
+        }
+      playerStore.payPlayer(
+        payer,
+        payee,
+        amount,
+      );
+      dispatch("send-message", `${name} collected $${amount} from ${payer}`);
+    }
   }
   prompt = false;
 }
