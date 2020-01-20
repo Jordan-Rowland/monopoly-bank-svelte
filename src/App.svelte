@@ -78,22 +78,36 @@ function clearErrors(event) {
 
 <style>
 
+main {
+  margin: 70px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+section {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+@media (min-width: 1280px) {
+  section {
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+  }
+
+}
+
 @media (max-width: 640px) {
   section {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
 }
-
-main {
-  margin-top: 70px
-}
-
-section {
-  display: flex;
-}
-
 
 </style>

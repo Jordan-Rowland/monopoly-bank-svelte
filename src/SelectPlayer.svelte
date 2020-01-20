@@ -78,45 +78,61 @@ function closeModal() {
 
 <style>
 
-section {
-  position: absolute;
-  z-index: 2;
-  top: 25%;
-  left: 43%;
-  display: flex;
+.container, section {
   flex-direction: column;
-  width: 15rem;
+  align-items: stretch;
 }
 
-input {
-  width: 15rem;
-}
+@media (min-width: 640px) {
+  .container {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-.cancel-button {
-  display: none;
-}
+  section {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    width: 15rem;
+  }
 
+  input {
+    width: 15rem;
+  }
+
+  .cancel-button {
+    display: none;
+  }
+
+}
 
 @media (max-width: 640px) {
   .container {
+    position: relative;
     display: flex;
+    align-items: center;
     justify-content: center;
+  }
+
+  section {
+    flex-direction: column;
+    width: 80%;
+  }
+
+  button, input {
+    width: 100%;
   }
 
   .cancel-button {
     display: block;
   }
 
-  section {
-    top: 0;
-    left: 0;
-    position: relative;
-    flex-direction: column;
-    width: 15rem;
-  }
-
 }
-
 
 main {
   margin-top: 50px;

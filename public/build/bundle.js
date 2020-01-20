@@ -698,7 +698,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "id", "black-drop");
-    			attr_dev(div, "class", "svelte-1ynnkgs");
+    			attr_dev(div, "class", "svelte-1wi4oif");
     			add_location(div, file, 4, 0, 21);
     			dispose = listen_dev(div, "click", /*click_handler*/ ctx[0], false, false, false);
     		},
@@ -984,6 +984,7 @@ var app = (function () {
     			t1 = space();
     			t2 = text(t2_value);
     			t3 = space();
+    			attr_dev(button, "class", "svelte-1d8zzgo");
     			add_location(button, file$1, 45, 8, 876);
     			dispose = listen_dev(button, "click", /*selectPlayer*/ ctx[6], false, false, false);
     			this.first = button;
@@ -1031,6 +1032,7 @@ var app = (function () {
     			t0 = text(/*action*/ ctx[1]);
     			t1 = space();
     			t2 = text(t2_value);
+    			attr_dev(button, "class", "svelte-1d8zzgo");
     			add_location(button, file$1, 57, 6, 1153);
     			dispose = listen_dev(button, "click", /*selectPlayer*/ ctx[6], false, false, false);
     		},
@@ -1073,6 +1075,7 @@ var app = (function () {
     			button = element("button");
     			t0 = text(/*action*/ ctx[1]);
     			t1 = text(" all");
+    			attr_dev(button, "class", "svelte-1d8zzgo");
     			add_location(button, file$1, 52, 6, 1031);
     			dispose = listen_dev(button, "click", /*selectPlayer*/ ctx[6], false, false, false);
     		},
@@ -1169,16 +1172,18 @@ var app = (function () {
     			button2.textContent = "Cancel";
     			attr_dev(input, "type", "number");
     			attr_dev(input, "placeholder", /*placeholder*/ ctx[5]);
-    			attr_dev(input, "class", "svelte-1jn8nfi");
+    			attr_dev(input, "class", "svelte-1d8zzgo");
     			add_location(input, file$1, 38, 6, 702);
     			add_location(label, file$1, 37, 4, 688);
+    			attr_dev(button0, "class", "svelte-1d8zzgo");
     			add_location(button0, file$1, 62, 4, 1261);
+    			attr_dev(button1, "class", "svelte-1d8zzgo");
     			add_location(button1, file$1, 66, 4, 1340);
-    			attr_dev(button2, "class", "cancel-button svelte-1jn8nfi");
+    			attr_dev(button2, "class", "cancel-button svelte-1d8zzgo");
     			add_location(button2, file$1, 70, 4, 1439);
-    			attr_dev(section, "class", "svelte-1jn8nfi");
+    			attr_dev(section, "class", "svelte-1d8zzgo");
     			add_location(section, file$1, 36, 2, 674);
-    			attr_dev(div, "class", "container svelte-1jn8nfi");
+    			attr_dev(div, "class", "container svelte-1d8zzgo");
     			add_location(div, file$1, 35, 0, 648);
 
     			dispose = [
@@ -1445,11 +1450,11 @@ var app = (function () {
     			attr_dev(input, "name", "confirm");
     			add_location(input, file$2, 28, 4, 560);
     			add_location(button0, file$2, 29, 4, 624);
-    			attr_dev(button1, "class", "cancel-button svelte-zljhsc");
+    			attr_dev(button1, "class", "cancel-button svelte-1w9ire");
     			add_location(button1, file$2, 30, 4, 680);
-    			attr_dev(div0, "class", "card svelte-zljhsc");
+    			attr_dev(div0, "class", "card svelte-1w9ire");
     			add_location(div0, file$2, 24, 2, 504);
-    			attr_dev(div1, "class", "container svelte-zljhsc");
+    			attr_dev(div1, "class", "container svelte-1w9ire");
     			add_location(div1, file$2, 23, 0, 478);
 
     			dispose = [
@@ -1632,7 +1637,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			create_component(selectplayer.$$.fragment);
-    			attr_dev(div, "class", "select-player svelte-1ukgvf8");
+    			attr_dev(div, "class", "select-player svelte-5agzv9");
     			add_location(div, file$3, 190, 2, 4615);
     		},
     		m: function mount(target, anchor) {
@@ -1786,32 +1791,32 @@ var app = (function () {
     			t13 = space();
     			if (if_block1) if_block1.c();
     			if_block1_anchor = empty();
-    			attr_dev(h2, "class", "svelte-1ukgvf8");
+    			attr_dev(h2, "class", "svelte-5agzv9");
     			add_location(h2, file$3, 154, 6, 3836);
-    			attr_dev(h4, "class", "svelte-1ukgvf8");
+    			attr_dev(h4, "class", "svelte-5agzv9");
     			add_location(h4, file$3, 155, 6, 3858);
-    			attr_dev(div0, "class", "svelte-1ukgvf8");
+    			attr_dev(div0, "class", "svelte-5agzv9");
     			add_location(div0, file$3, 153, 4, 3824);
-    			attr_dev(div1, "class", "headers svelte-1ukgvf8");
+    			attr_dev(div1, "class", "headers svelte-5agzv9");
     			add_location(div1, file$3, 152, 2, 3798);
-    			attr_dev(button0, "class", "normal-button svelte-1ukgvf8");
+    			attr_dev(button0, "class", "normal-button svelte-5agzv9");
     			add_location(button0, file$3, 161, 6, 3977);
-    			attr_dev(div2, "class", "svelte-1ukgvf8");
+    			attr_dev(div2, "class", "svelte-5agzv9");
     			add_location(div2, file$3, 160, 4, 3965);
-    			attr_dev(button1, "class", "normal-button svelte-1ukgvf8");
+    			attr_dev(button1, "class", "normal-button svelte-5agzv9");
     			add_location(button1, file$3, 168, 6, 4139);
-    			attr_dev(button2, "class", "small-button svelte-1ukgvf8");
+    			attr_dev(button2, "class", "small-button svelte-5agzv9");
     			add_location(button2, file$3, 173, 6, 4287);
-    			attr_dev(div3, "class", "svelte-1ukgvf8");
+    			attr_dev(div3, "class", "svelte-5agzv9");
     			add_location(div3, file$3, 167, 4, 4127);
-    			attr_dev(button3, "class", "small-button svelte-1ukgvf8");
+    			attr_dev(button3, "class", "small-button svelte-5agzv9");
     			add_location(button3, file$3, 180, 6, 4439);
-    			attr_dev(div4, "class", "svelte-1ukgvf8");
+    			attr_dev(div4, "class", "svelte-5agzv9");
     			add_location(div4, file$3, 179, 4, 4427);
-    			attr_dev(div5, "class", "buttons svelte-1ukgvf8");
+    			attr_dev(div5, "class", "buttons svelte-5agzv9");
     			add_location(div5, file$3, 159, 2, 3939);
     			attr_dev(section, "id", section_id_value = "p" + /*id*/ ctx[1]);
-    			attr_dev(section, "class", "svelte-1ukgvf8");
+    			attr_dev(section, "class", "svelte-5agzv9");
     			add_location(section, file$3, 151, 0, 3775);
 
     			dispose = [
@@ -3360,9 +3365,9 @@ var app = (function () {
     			}
 
     			add_location(header, file$8, 50, 0, 1063);
-    			attr_dev(section, "class", "svelte-83qfl3");
+    			attr_dev(section, "class", "svelte-1jvxijp");
     			add_location(section, file$8, 64, 2, 1307);
-    			attr_dev(main, "class", "svelte-83qfl3");
+    			attr_dev(main, "class", "svelte-1jvxijp");
     			add_location(main, file$8, 63, 0, 1298);
     		},
     		m: function mount(target, anchor) {

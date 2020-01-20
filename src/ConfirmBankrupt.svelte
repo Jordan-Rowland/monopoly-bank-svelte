@@ -44,10 +44,10 @@ function closeModal() {
 }
 
 .card {
+  position: absolute;
   z-index: 2;
   display: flex;
   flex-direction: column;
-  position: absolute;
   background-color: hsl(0, 100%, 99%);
   border: 2px solid hsl(0, 100%, 92%);
   padding: 1.5rem;

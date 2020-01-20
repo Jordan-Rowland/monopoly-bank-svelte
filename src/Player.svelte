@@ -241,6 +241,15 @@ input {
   display: none;
 }
 
+@media (min-width: 780px) {
+  section {
+    /*margin: 0.15rem;*/
+    /*max-width: 40%;*/
+    justify-content: space-around;
+  }
+
+}
+
 @media (max-width: 640px) {
   section {
     flex-direction: row;
